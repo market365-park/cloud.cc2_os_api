@@ -38,7 +38,7 @@ def create_stack(instance_info):
     stack = yaml.dump(data, default_flow_style=False)
     stack = stack.replace("'", "")
 
-    file_path = ".\%s-stack.yml" % (instance_info['name'])
+    file_path = "./%s-stack.yml" % (instance_info['name'])
     with open(file_path, 'w') as f:
         # f.write('heat_template_version: 2013-05-23\n')
         f.write('heat_template_version: 2016-04-08\n')

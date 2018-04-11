@@ -1,0 +1,24 @@
+heat_template_version: 2016-04-08
+description: Simple template to deploy a single compute instance
+outputs:
+  instance_id:
+    description: UUID of the instance
+    value: {get_resource: my_instance}
+  instance_name:
+    description: Name of the instance
+    value: {get_attr:[my_instance, name]}
+resources:
+  instance_port:
+    properties:
+      network: DevOps_Network
+      security_groups:
+      - default
+    type: OS::Neutron::Port
+  my_instance:
+    properties:
+      flavor: m1.small 
+      image: CentOS-7-x86_64-GenericCloud
+      name: testvm1
+      networks:
+      - port: {get_resource: instance_port}
+    type: OS::Nova::Server
